@@ -32,12 +32,12 @@ Chaque action sera exécutée **dans un thread distinct**.
 Créer une classe `BankAccount` avec :
 
 - Attributs :
-  - `accountNumber` (int)
-  - `balance` (double)
+    - `accountNumber` (int)
+    - `balance` (double)
 - Méthodes :
-  - `deposit(double amount)`
-  - `withdraw(double amount)`
-  - `getBalance()`
+    - `deposit(double amount)`
+    - `withdraw(double amount)`
+    - `getBalance()`
 
 📌 **Aucune synchronisation à ce stade**
 
@@ -49,8 +49,8 @@ Dans une classe `Main` :
 
 - Créer un compte avec **1000 €**
 - Effectuer :
-  - un dépôt de 200 €
-  - un retrait de 150 €
+    - un dépôt de 200 €
+    - un retrait de 150 €
 - Afficher le solde final
 
 ---
@@ -105,9 +105,74 @@ Retrait 2 : 700 €
 6️⃣ Simulation réaliste
 - Créer 10 threads clients
 - Chaque client effectue 5 opérations aléatoires :
-  - dépôt
-  - retrait
-  - consultation
-💡 Ajouter un Thread.sleep() pour simuler le temps d’attente à l’ATM.
+    - dépôt
+    - retrait
+    - consultation
+      💡 Ajouter un Thread.sleep() pour simuler le temps d’attente à l’ATM.
 
+
+## 🚨 Partie 6 — Gestion des exceptions & robustesse
+
+### 🎯 Objectifs
+- Rendre l’ATM plus **robuste** face aux entrées invalides et aux erreurs d’exécution.
+- Comprendre **où** gérer une exception en contexte multi-thread (dans `run()`, dans les méthodes métier, ou les deux).
+- Savoir créer et utiliser des **exceptions personnalisées**.
+
+---
+
+### 6.1 — Définir des exceptions personnalisées
+
+Créer 2 exceptions :
+
+1) `InvalidAmountException` (montant invalide : <= 0)
+2) `InsufficientFundsException` (fonds insuffisants)
+
+Contraintes :
+- Elles doivent hériter de `Exception` **ou** `RuntimeException` (à justifier dans vos réponses).
+- Elles doivent contenir un message clair.
+
+Exemples de cas à couvrir :
+- dépôt de `0` ou `-10`
+- retrait de `-50`
+- retrait d’un montant supérieur au solde
+
+---
+
+### 6.2 — Faire respecter les règles dans `BankAccount`
+
+Modifier `BankAccount` pour :
+- lever `InvalidAmountException` si `amount <= 0`
+- lever `InsufficientFundsException` si `balance < amount` lors d’un retrait
+
+📌 Important : gardez la **synchronisation** (`synchronized` ou `Lock`) autour de la section critique.
+
+À implémenter dans :
+- `deposit(double amount)`
+- `withdraw(double amount)`
+
+---
+
+### 6.3 — Gérer les exceptions dans les threads (classe `ATMTask`)
+
+Dans `ATMTask.run()` :
+- capturer les exceptions et afficher un message lisible (avec l’ID du thread ou du client)
+- ne pas arrêter le programme complet pour une opération invalide
+
+✅ Attendus :
+- Si une opération échoue, les autres threads continuent.
+- Le message d’erreur doit préciser :
+    - l’action
+    - le montant
+    - la raison (exception)
+
+---
+
+### 6.4 — Scénarios de test obligatoires
+
+Mettre en place (dans `Main`) des opérations concurrentes incluant :
+
+- 1 retrait valide
+- 1 retrait trop grand (fonds insuffisants)
+- 1 dépôt négatif
+- 1 consultation du solde
 
