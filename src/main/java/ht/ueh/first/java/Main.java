@@ -6,9 +6,18 @@ public class Main {
 
         BankAccount account = new BankAccount(1, 1000);
 
-        account.deposit(200);
-        account.withdraw(150);
+        Thread t1 = new Thread(
+                new ATMTask(account, ATMTask.Action.DEPOSIT, 300),
+                "Client-1"
+        );
 
-        System.out.println("Solde final : " + account.getBalance() + " €");
+        Thread t2 = new Thread(
+                new ATMTask(account, ATMTask.Action.BALANCE, 0),
+                "Client-2"
+        );
+
+        t1.start();
+        t2.start();
     }
 }
+
