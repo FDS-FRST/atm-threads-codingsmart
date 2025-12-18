@@ -6,20 +6,18 @@ public class Main {
 
         BankAccount account = new BankAccount(1, 1000);
 
-        // Thread 1 : Retrait de 700 €
         Thread t1 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 700),
+                new ATMTask(account, ATMTask.Action.DEPOSIT, 300),
                 "Client-1"
         );
 
-        // Thread 2 : Retrait de 700 €
         Thread t2 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 700),
+                new ATMTask(account, ATMTask.Action.BALANCE, 0),
                 "Client-2"
         );
 
-        // Lancer les deux threads simultanément
         t1.start();
         t2.start();
     }
 }
+
