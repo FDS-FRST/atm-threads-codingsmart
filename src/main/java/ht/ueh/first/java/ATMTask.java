@@ -1,6 +1,9 @@
 package ht.ueh.first.java;
 
+import java.util.Random;
+
 public class ATMTask implements Runnable {
+
 
     public enum Action {
         DEPOSIT,
@@ -9,13 +12,11 @@ public class ATMTask implements Runnable {
     }
 
     private BankAccount account;
-    private Action action;
-    private double amount;
+    private Random random = new Random();
+
 
     public ATMTask(BankAccount account, Action action, double amount) {
         this.account = account;
-        this.action = action;
-        this.amount = amount;
     }
 
     @Override
