@@ -12,12 +12,12 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public void  deposit(double amount){
+    public synchronized void deposit(double amount){
         balance += amount;
         System.out.println("Dépôt de " + amount + " € | Nouveau solde : " + balance);
     }
 
-    public void withdraw(double amount) {
+    public synchronized void withdraw(double amount) {
         if (balance >= amount) {
             balance -= amount;
             System.out.println("Retrait de " + amount + " € | Nouveau solde : " + balance);
