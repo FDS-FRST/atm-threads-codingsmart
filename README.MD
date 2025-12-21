@@ -35,6 +35,7 @@ Créer une classe `BankAccount` avec :
 - Attributs :
     - `accountNumber` (int)
     - `balance` (double)
+
 - Méthodes :
     - `deposit(double amount)`
     - `withdraw(double amount)`

@@ -7,12 +7,12 @@ public class Main {
         BankAccount account = new BankAccount(1, 1000);
 
         Thread t1 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 300),
+                new ATMTask(account, ATMTask.Action.WITHDRAW, 700),
                 "Client-1"
         );
 
         Thread t2 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 0),
+                new ATMTask(account, ATMTask.Action.WITHDRAW, 700),
                 "Client-2"
         );
 
