@@ -7,24 +7,23 @@ public class Main {
         BankAccount account = new BankAccount(1, 1000);
 
         Thread t1 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,300),
-                "Client-1"
+                new ATMTask( account,ATMTask.Action.WITHDRAW,300,1)
         );
 
 
         Thread t2 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,2000),
-                "Client-2"
+                new ATMTask( account,ATMTask.Action.WITHDRAW,2000,2)
+
         );
 
         Thread t3 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,-50),
-                "Client-3"
+                new ATMTask( account,ATMTask.Action.WITHDRAW,-50,3)
+
         );
 
         Thread t4 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,0),
-                "Client-4"
+                new ATMTask( account,ATMTask.Action.WITHDRAW,0,4)
+
         );
 
         t1.start();
