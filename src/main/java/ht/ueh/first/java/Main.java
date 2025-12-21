@@ -2,7 +2,7 @@ package ht.ueh.first.java;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidAmountException,InsufficientFundsException {
 
         BankAccount account = new BankAccount(1, 1000);
 

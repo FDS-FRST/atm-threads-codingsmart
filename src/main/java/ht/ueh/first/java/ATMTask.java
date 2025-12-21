@@ -20,6 +20,7 @@ public class ATMTask implements Runnable {
 
     @Override
     public void run() {
+    try {
         switch (action) {
             case DEPOSIT:
                 account.deposit(amount);
@@ -32,5 +33,11 @@ public class ATMTask implements Runnable {
                         + " | Solde : " + account.getBalance() + " €");
                 break;
         }
+    } catch (InvalidAmountException | InsufficientFundsException e) {
+       System.out.println(e.getMessage());
+    } finally {
+
+    }
+
     }
 }

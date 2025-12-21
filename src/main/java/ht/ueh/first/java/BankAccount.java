@@ -14,7 +14,7 @@ public class BankAccount {
 
     public synchronized void deposit(double amount) throws InvalidAmountException{
         if(amount<=0){
-            throw new InvalidAmounException ("Le Montant" + amount "est invalide, les valeurs negatives ne sont pas acceptees");
+            throw new InvalidAmountException ("Le Montant" + amount +"est invalide, les valeurs negatives ne sont pas acceptees");
         } 
         balance += amount;
         System.out.println("Dépôt de " + amount + " € | Nouveau solde : " + balance);
@@ -22,20 +22,17 @@ public class BankAccount {
 
     public synchronized void withdraw(double amount) throws InsufficientFundsException, InvalidAmountException{
         if(amount<=0){
-            throw new InvalidAmounException ("Vous ne pouvez pas retirer ce montant de " + amount + " €, entrez une valeur superieure a zero");
+            throw new InvalidAmountException ("Vous ne pouvez pas retirer ce montant de " + amount + " €, entrez une valeur superieure a zero");
         }  
 
         if(amount>balance){
             throw new InsufficientFundsException ("Votre balance est insuffisante, veuillez entrer une valeur inferieure a" + balance);
-        }  
-            balance -= amount;
-            System.out.println("Retrait de " + amount + " € | Nouveau solde : " + balance);
-        } else {
-            System.out.println("Retrait refusé : solde insuffisant");
         }
+        balance -= amount;
+        System.out.println("Transaction réussie:\n montant retiré -> " + amount);
     }
 
-    public double getBalance(){
+    public synchronized double getBalance(){
         return balance;
     }
 
