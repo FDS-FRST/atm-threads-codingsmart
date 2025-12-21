@@ -32,7 +32,7 @@ public class BankAccount {
         }
     }
 
-    public double getBalance() {
+    public synchronized double getBalance() {
         return balance;
     }
 
