@@ -26,6 +26,14 @@ public class BankAccount {
         }
     }
 
+    /*
+    Pourquoi synchronized empêche-t-il la race condition ?
+        R.: Parceque synchronized empêche la race condition en donnant l'accès d'exécution à un seul thread à la fois.
+    Que se passe-t-il si plusieurs threads veulent entrer dans la méthode ?
+        R.: Si plusieurs threads veulent entrer les autres attendent que le thread cours d'exécuytion soit terminé.
+
+    *  */
+
     public double getBalance(){
         return balance;
     }
