@@ -6,18 +6,14 @@ public class Main {
 
         BankAccount account = new BankAccount(1, 1000);
 
-        Thread t1 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 300),
-                "Client-1"
-        );
+        System.out.println("=== SIMULATION MULTI-CLIENTS ATM ===");
 
-        Thread t2 = new Thread(
-                new ATMTask(account, ATMTask.Action.WITHDRAW, 0),
-                "Client-2"
-        );
-
-        t1.start();
-        t2.start();
+        for (int i = 1; i <= 10; i++) {
+            Thread client = new Thread(
+                    new ATMTask(account),
+                    "Client-" + i
+            );
+            client.start();
+        }
     }
 }
-

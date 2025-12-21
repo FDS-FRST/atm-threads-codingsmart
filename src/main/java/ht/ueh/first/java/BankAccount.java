@@ -6,27 +6,33 @@ public class BankAccount {
     private double balance;
 
 
-    public BankAccount (int accountNumber, double balance) {
+    public BankAccount(int accountNumber, double balance) {
 
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    public synchronized void deposit(double amount){
+    public synchronized void deposit(double amount) {
         balance += amount;
-        System.out.println("Dépôt de " + amount + " € | Nouveau solde : " + balance);
+        System.out.println(Thread.currentThread().getName()
+                + " | Dépôt de " + amount + " € | Nouveau solde : " + balance);
+
     }
 
     public synchronized void withdraw(double amount) {
         if (balance >= amount) {
             balance -= amount;
-            System.out.println("Retrait de " + amount + " € | Nouveau solde : " + balance);
+            System.out.println(Thread.currentThread().getName()
+                    + " | Retrait refusé : solde insuffisant");
+
         } else {
-            System.out.println("Retrait refusé : solde insuffisant");
+            System.out.println(Thread.currentThread().getName()
+                    + " | Retrait refusé : solde insuffisant");
+
         }
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return balance;
     }
 
