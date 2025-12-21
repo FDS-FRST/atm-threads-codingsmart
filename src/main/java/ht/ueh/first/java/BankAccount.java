@@ -22,14 +22,20 @@ public class BankAccount {
 
     public synchronized void withdraw(double amount) throws InsufficientFundsException, InvalidAmountException{
         if(amount<=0){
-            throw new InvalidAmountException ("Vous ne pouvez pas retirer ce montant de " + amount + " €, entrez une valeur superieure a zero");
-        }  
+            throw new InvalidAmountException(
+                    "Montant de retrait invalide : " + amount
+            );
+        }
 
         if(amount>balance){
-            throw new InsufficientFundsException ("Votre balance est insuffisante, veuillez entrer une valeur inferieure a" + balance);
-        }
+            throw new InsufficientFundsException(
+                    "Fonds insuffisants : solde = " + balance
+                            + ", retrait demandé = " + amount
+            );        }
+
         balance -= amount;
-        System.out.println("Transaction réussie:\n montant retiré -> " + amount);
+        System.out.println(Thread.currentThread().getName()
+                + " | Retrait de " + amount + " € | Solde : " + balance);
     }
 
     public synchronized double getBalance(){
