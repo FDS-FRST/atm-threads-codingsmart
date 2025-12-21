@@ -17,12 +17,12 @@ public class Main {
         );
 
         Thread t3 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,-50,3)
+                new ATMTask( account,ATMTask.Action.DEPOSIT,-50,3)
 
         );
 
         Thread t4 = new Thread(
-                new ATMTask( account,ATMTask.Action.WITHDRAW,0,4)
+                new ATMTask( account,ATMTask.Action.BALANCE,0,4)
 
         );
 
